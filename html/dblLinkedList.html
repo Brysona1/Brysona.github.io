@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../bootstrap/bootstrap.css" rel="stylesheet"> <!--Add bootstrap-->
+    <title>Learning Data Structures</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="content">
+            <nav class="navbar navbar-expand-xl navbar-dark bg-dark" aria-label="Navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html">Algorithms and Structures</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="dblLinkedList.html">Doubly Linked
+                                    List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="cirLinkedList.html">Circular Linked List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="dictionary.html">Dictionaries</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="oddEvenSort.html">Odd-Even Sort</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <h1>Doubly Linked List</h1>
+
+            <button type="button" class="collapsible bg-dark">Doubly Linked List Description</button>
+            <div class="content">
+                <p>Doubly Linked Lists define nodes that contain a previous pointer, a value, and a next pointer. At any given node, the pointers will access subsiding nodes in either direction. 
+                    <br><br>
+                    This makes a Doubly Linked List more flexible than a regular Linked List. At the cost of being slower to run and using up more memory, the Doubly Linked List is easy to reverse and has a low overhead. Some implementations include webpage navigation, programming a deck of cards, running thread schedulers among other uses.</p>
+            </div>
+            <h4><br>Try it yourself below!</h4>
+
+            <div class="col-12" id="controls">
+                <!-- add item -->
+                <input type="button" class="btn btn-primary m-2" id="pushEndButton" value="Push End">
+                <input type="button" class="btn btn-primary" id="pushFrontButton" value="Push Front"><br />
+                <input class="mx-2" type="text" id="pushInput" name="add" placeholder="Enter Value Here">
+
+                <br /><br />
+                <!-- remove item -->
+                <input type="button" class="btn btn-primary m-2" id="popEndButton" value="Pop End">
+                <input type="button" class="btn btn-primary" id="popFrontButton" value="Pop Front">
+                <input type="button" class="btn btn-primary m-2" id="deleteValueButton" value="Delete Value"><br />
+                <input class="mx-2 mb-2" type="text" id="popInput" name="remove" placeholder="Enter Value Here">
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <!--Add bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
+
+    <!--Add p5.js-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+
+    <!--add our script-->
+    <script src="../js/clShape/clShape.js"></script>
+    <script src="../js/clShape/clRectangle.js"></script>
+    <script src="../js/clShape/clDNode.js"></script>
+    <script src="../js/dblLinkedList/dblLinkedList.js"></script>
+    <script src="../js/dblLinkedList/dblLinkedMain.js"></script>
+    <script src="../js/collapse.js"></script>
+    <!--add our script-->
+</body>
+
+<!-- Footer -->
+<footer class="page-footer font-small blue" id="footer">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2023 Copyright:
+        <a href="https://www.findlay.edu/"> The University of Findlay</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</html>

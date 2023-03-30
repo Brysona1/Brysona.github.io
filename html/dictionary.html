@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../bootstrap/bootstrap.css" rel="stylesheet"> <!--Add bootstrap-->
+    <title>Learning Data Structures</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="content">
+            <nav class="navbar navbar-expand-xl navbar-dark bg-dark" aria-label="Navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html">Algorithms and Structures</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                        aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="dblLinkedList.html">Doubly Linked
+                                    List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="cirLinkedList.html">Circular Linked List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="dictionary.html">Dictionaries</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="oddEvenSort.html">Odd-Even Sort</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <h4>Dictionary</h4>
+            <button class="collapsible bg-light dropdown-toggle dropdown" type="button" data-toggle="dropdown">
+                <span class="caret"></span></button>
+                <div class="content">
+                    <p>Dictionaries are dynamic hashmaps that are made of different entries. Each entry is made from a key and a value.
+                    <br><br>
+                    Keys are typically strings or integer data types for easy navigation while the matching values can be any data type. Keys within a dictionary are unique where if a duplicate key is found, the new value will override the old value.
+                    <br><br>
+                    A dictionary will function as a Lookup Table where data can be referenced and edited by adding or removing keyvalue pairs and searching for existing values by its matching key. Data Dictionaries are created for easy data storage such as the Oak Ridge national Laboratory which provides basic information for different variables.</p>
+                </div>
+            <div class='col-12' id="controls">
+                <label>Key: </label><input type="text" id="key" value="">
+                <label>Value: </label><input type="text" id="value" value="">
+                <br>
+                <button type="button" class="btn btn-primary mt-2 mb-2" onclick="addKey()">Add/Update Value</button>
+                <button type="button" class="btn btn-primary mt-2 mb-2">Remove All Values</button>
+            </div>
+        </div>
+    </div>
+        
+    <!--Add bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
+
+    <!--Add p5.js-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+
+    <!--add our script-->
+    <script src="../js/clShape/clShape.js"></script>
+    <script src="../js/clShape/clRectangle.js"></script>
+    <script src="../js/collapse.js"></script>
+    <script src="../js/dictionaryScripts/Dictionary.js"></script>
+</body>
+
+<!-- Footer -->
+<footer class="page-footer font-small blue" id="footer">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2023 Copyright:
+        <a href="https://www.findlay.edu/"> The University of Findlay</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+
+</html>
