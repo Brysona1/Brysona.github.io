@@ -38,18 +38,23 @@
             </nav>
             <h1>Odd-Even Sort</h1>
 
-            <button type="button" class="collapsible bg-dark">Odd-Even Sort Description</button>
+            <button type="button" class="collapsible bg-dark" style="color:white"> > Odd-Even Sort Description</button>
             <div class="content">
                 <p>An Odd-Even Sort is a variation of a Bubble Sort that utilizes the Divide & Conquer methodology. A given unsorted array becomes sorted within two phases, alternating between a Bubble Sort on the Odd indexes of the array followed the Even indexes. These iterations repeat until no more values can be swapped, indicating a completed sorted array. 
                     <br><br>
                     An Odd-Even Sort is ideal when working with larger amounts of data. Where a regular Bubble Sort excels in uniform usage, an Odd-Even Sort Often performs better in numbers. Often, multiple processors are set to run the algorithm in simultaneous instances (parallelism) to process these multitudes of data.</p>
             </div>
-    
+
             <h4><br>Try it yourself below!</h4>
 
             <div id="controls">
                 <input type="button" class="btn btn-primary" id="toggleAnimation" value="Auto">
                 <input type="button" class="btn btn-primary" id="nextStep" value="Next Step">
+                <br />
+                <div class="col-2">
+                    <label for="fpsRange" class="form-label">Speed</label>
+                    <input type="range" min="1" max="60" step="1" id="fpsRange">
+                </div>
             </div>
         </div>
     </div>

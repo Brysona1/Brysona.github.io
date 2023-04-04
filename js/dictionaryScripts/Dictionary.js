@@ -31,7 +31,10 @@ function addKey() {
     dict[x] = y;
     buildShapes(dict);
 }
-
+function clearDictionary() {
+    dict = new Object();
+    buildShapes(dict);
+}
 function buildShapes(dict) {
     Shapes = [];
     for (var key in dict) {
@@ -42,10 +45,10 @@ function buildShapes(dict) {
         h = 50;
         count = Shapes.length/2;
         shapeLen = Shapes.length;
-        Shapes[shapeLen] = new clRectangle(x, y * count, 0, 0, h, w);
+        Shapes[shapeLen] = new clRectangle(x, y + (h*count), 0, 0, h, w);
         Shapes[shapeLen].text = key;
         shapeLen = Shapes.length;
-        Shapes[shapeLen] = new clRectangle(x + w, y * count, 0, 0, h, w);
+        Shapes[shapeLen] = new clRectangle(x + w, y + (h*count), 0, 0, h, w);
         Shapes[shapeLen].text = value;
     }
 }

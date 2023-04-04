@@ -7,6 +7,8 @@ let Shapes = []; //This is where every shape is stored, regardless of type
 let nodes = new DblLinkedList;
 let canvasWidth = 1000;
 let canvasHeight = 600;
+let gridX = canvasWidth / 3;
+let gridY = canvasHeight / 8;
 let idGen = 0; //Used to generate a unique object ID for every node.
 let mouseObj = null;
 
@@ -49,41 +51,43 @@ function draw() {
 		$("#pushFrontButton").disabled = true;
 		$("#popEndButton").disabled = true;
 		$("#popFrontButton").disabled = true;
+		$("#deleteValueButton").disabled = true;
 		nodes.checkAnimation();
 	} else {
 		$("#pushEndButton").disabled = false;
 		$("#pushFrontButton").disabled = false;
 		$("#popEndButton").disabled = false;
 		$("#popFrontButton").disabled = false;
+		$("#deleteValueButton").disabled = false;
 	}
 }
 
-function mousePressed()
-{
-	for(let i = 0; i < Shapes.length; i++)
-	{
+//function mousePressed()
+//{
+//	for(let i = 0; i < Shapes.length; i++)
+//	{
+//
+//		if (mouseX >= Shapes[i].x && mouseX <= Shapes[i].x + Shapes[i].width)
+//		{
+//			if (mouseY >= Shapes[i].y && mouseY <= Shapes[i].y + Shapes[i].height)
+//			{
+//				Shapes[i].hspeed = 0;
+//				Shapes[i].vspeed = 0;
+//				Shapes[i]._hasDestination = false;
+//				Shapes[i].selected = true;
+//				mouseObj = Shapes[i];
+//			}
+//		}
+//	}
+//}
 
-		if (mouseX >= Shapes[i].x && mouseX <= Shapes[i].x + Shapes[i].width)
-		{
-			if (mouseY >= Shapes[i].y && mouseY <= Shapes[i].y + Shapes[i].height)
-			{
-				Shapes[i].hspeed = 0;
-				Shapes[i].vspeed = 0;
-				Shapes[i]._hasDestination = false;
-				Shapes[i].selected = true;
-				mouseObj = Shapes[i];
-			}
-		}
-	}
-}
-
-function mouseReleased()
-{
-	if (mouseObj != null)
-	{
-		mouseObj.selected = false;
-	}
-}
+//function mouseReleased()
+//{
+//	if (mouseObj != null)
+//	{
+//		mouseObj.selected = false;
+//	}
+//}
 
 //Find the GCD of 2 numbers
 function gcd(x, y) {
@@ -135,6 +139,10 @@ function arrow(x1, y1, x2, y2, headLen, headAngle) {
 	line(x2, y2, x2 + lengthdir_x(headLen, ccAngle), y2 + lengthdir_y(headLen, ccAngle));
 }
 
+function windowResized()
+{
+
+}
 const pushEndItem = () => {
 	nodes.push();
 }

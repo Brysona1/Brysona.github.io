@@ -2,7 +2,7 @@ class clShape
 {
 	constructor(x, y, hspeed, vspeed)
 	{
-		this._id = idGen++;
+		this._id = "0x" + (idGen++).toString(16);
 		this._x = x;
 		this._y = y;
 		this._destx = null;
