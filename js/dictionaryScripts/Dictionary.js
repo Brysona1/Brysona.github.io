@@ -14,6 +14,13 @@ function draw() {
     }
 
     background(220);
+    //Add the key and value table header
+    rect(50, 0, 100, 50);
+    rect(150, 0, 100, 50);
+    textAlign(CENTER,CENTER);
+    text("Key", 100, 25);
+    text("Value", 200, 25);
+    
     //Perform each object's draw event
     for (let i = 0; i < Shapes.length; i++) {
         Shapes[i].draw();

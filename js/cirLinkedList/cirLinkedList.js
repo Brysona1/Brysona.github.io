@@ -261,7 +261,7 @@ class CirLinkedList {
                 break;
         }
     }
-    animUnshift() 
+    animUnshift() //push front
     {
         switch (this.animStep) 
         {
