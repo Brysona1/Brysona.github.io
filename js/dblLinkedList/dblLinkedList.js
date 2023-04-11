@@ -49,8 +49,6 @@ class DblLinkedList {
         } else {
             this.tail = this.tail._prevObj; //set tail to new last node
             this.tail.assignNext(null); //unassign the pointer from the deleted node
-            //temp.assignPrev(null);
-            //temp._prevObj = null; 
         }
         this.length--; //decrement length
     }
@@ -253,6 +251,7 @@ class DblLinkedList {
                 break;
         }
     }
+    
     animUnshift()
     {
         switch(this.animStep)
@@ -412,16 +411,16 @@ class DblLinkedList {
     // returns array of (x-coord, y-coord)
     findPos(listPos)
     {
-        let height = canvasHeight / 6; 
-        let width = canvasWidth / 4;
+        let height = canvasHeight / (gridY + 1); 
+        let width = canvasWidth / (gridX + 1);
 
-        let y = (listPos % 5) + 1;
-        let x = floor(listPos / 5) + 1;
+        let y = (listPos % gridY) + 1;
+        let x = floor(listPos / gridY) + 1;
         
         if (x % 2 == 0) //Flip the order of y if x is even
         {
             y = y * -1;
-            y = y + 6;
+            y = y + (gridY + 1);
         }
         let coords = [0,0];
         coords[0] = round(width * x - (125/2));

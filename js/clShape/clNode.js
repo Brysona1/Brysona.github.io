@@ -9,6 +9,7 @@ class clNode extends clRectangle
 		this._deleted = 0; //Has this node been marked 'deleted'
 		this._objAlpha = 255; //opacity of the object
 		this._ptrSize = width * 2 / 7; //Calculates the width of the two pointer boxes.
+		this._arrowType = 1;
 
 		//Next object data
 		this._nextObj = null; //Pointer to the next node
@@ -59,7 +60,8 @@ class clNode extends clRectangle
 	{
 		//Must be executed AFTER x and y are updated.
 		if (this._deleted == 2) return;
-		else if (this._deleted == 1) {
+		else if (this._deleted == 1) 
+		{
 			if (this.alpha <= 0) {
 				this._deleted = 2;
 			}
@@ -83,6 +85,8 @@ class clNode extends clRectangle
 	{
 		if (this._deleted == 2) return;
 		push();
+		fill(255, this.alpha);
+		stroke(0, this.alpha);
 		//Draw the boxes that make the node's shape
 		beginShape(QUAD_STRIP);
 		//first vertical line
@@ -125,16 +129,16 @@ class clNode extends clRectangle
 			push();
 			stroke(this._nextColor);
 			//If there is a next node, draw an arrow from this node to the next node.
-			arrow(this._nextPtrx, this._nextPtry, this._nextObj._nextPtrDestx, this._nextObj._nextPtrDesty, 10, 25);
+			if (this._arrowType == 1)
+			{
+				arrow(this._nextPtrx, this._nextPtry, this._nextObj._nextPtrDestx, this._nextObj._nextPtrDesty, 10, 25);
+			}
+			else
+			{
+				endArrow(this.x + this.width, this.y + (this.height / 2), this._nextObj.x + (this._nextObj.width / 2), this._nextObj.y, 20, 10, 25)
+			}
 			pop();
 		}
-		//if (this._hasPrev)
-		//{
-		//	push();
-		//	stroke(this._prevColor);
-		//	arrow(this._prevPtrx, this._prevPtry, this._prevObj._prevPtrDestx, this._prevObj._prevPtrDesty, 10, 25);
-		//	pop();
-		//}
 	}
 	
     calcNextArrow() //calculate where the nextPtr arrow should start

@@ -6,10 +6,8 @@ for (let i = 0; i < coll.length; i++) {
     var content = this.nextElementSibling;
     if (content.style.display === "block") {
       content.style.display = "none";
-      dropdown.style.display = "caret";
     } else {
       content.style.display = "block";
-      dropdown.style.display = "caret-up"
     }
   });
 }

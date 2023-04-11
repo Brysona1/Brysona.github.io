@@ -14,11 +14,11 @@ document.getElementById("fpsRange").value = fps;
 // execute once when the program begins
 // The array is filled with random values in setup() function.
 function setup() {
-    let x = $("#content").offsetWidth;
-    canvas = createCanvas(x, window.innerHeight * .9);
+    let x = ($("#content").offsetWidth)*.8;
+    canvas = createCanvas(x, window.innerHeight * .8);
     canvas.parent('content');
-    for (let i = 0; i < 50; i++) {
-        values.push(random(height));
+    for (let i = 0; i < 30; i++) {
+        values.push(floor(Math.random() * (height - 10)) + 10);
     }
     frameRate(fps);
 }
@@ -115,6 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#nextStep").addEventListener("click", nextStep);
 });
 function windowResized() {
-    let x = $("#content").offsetWidth;
-    resizeCanvas(x, window.innerHeight * .9);
+    let x = ($("#content").offsetWidth)* .8;
+    resizeCanvas(x, window.innerHeight * .8);
 }

@@ -7,8 +7,9 @@ let Shapes = []; //This is where every shape is stored, regardless of type
 let nodes = new CirLinkedList;
 let canvasWidth = 1000;
 let canvasHeight = 600;
+let gridX = 4;
+let gridY = 4;
 let idGen = 0; //Used to generate a unique object ID for every node.
-let mouseObj = null;
 
 
 // The statements in the setup() function
@@ -60,51 +61,6 @@ function draw() {
 	}
 }
 
-function mousePressed() {
-	for (let i = 0; i < Shapes.length; i++) {
-
-		if (mouseX >= Shapes[i].x && mouseX <= Shapes[i].x + Shapes[i].width) {
-			if (mouseY >= Shapes[i].y && mouseY <= Shapes[i].y + Shapes[i].height) {
-				Shapes[i].hspeed = 0;
-				Shapes[i].vspeed = 0;
-				Shapes[i]._hasDestination = false;
-				Shapes[i].selected = true;
-				mouseObj = Shapes[i];
-			}
-		}
-	}
-}
-
-function mouseReleased() {
-	if (mouseObj != null) {
-		mouseObj.selected = false;
-	}
-}
-
-//Find the GCD of 2 numbers
-function gcd(x, y) {
-	x = abs(x);
-	y = abs(y);
-	while (y) {
-		var i = y;
-		y = x % y;
-		x = i;
-	}
-	return x;
-}
-
-//Convert a decimal to a fraction to the nearest thousandth, does not simplify. Ex 1.25 -> 5/4
-//Outputs an array of 2 values, out[top, bottom]
-function decToFrac(dec) {
-	dec = round(dec * 1000);
-	g = gcd(dec, 1000);
-
-	out = [];
-	out[0] = dec / g;
-	out[1] = 1000 / g;
-	return out;
-}
-
 //Calculate the x coordinate of a point with a specific distance and rotation from the origin
 function lengthdir_x(dist, angle) {
 	let x = dist * cos(angle);
@@ -131,6 +87,14 @@ function arrow(x1, y1, x2, y2, headLen, headAngle) {
 	line(x2, y2, x2 + lengthdir_x(headLen, ccAngle), y2 + lengthdir_y(headLen, ccAngle));
 }
 
+//Draws the arrow that loops back to the first node.
+function endArrow(x1, y1, x2, y2, spacing, headLen, headAngle)
+{
+	line(x1, y1, x1 + spacing, y1);
+	line(x1 + spacing, y1, x1 + spacing, y2 - spacing);
+	line(x1 + spacing, y2 - spacing, x2, y2 - spacing);
+	arrow(x2, y2 - spacing, x2, y2, headLen, headAngle);
+}
 const pushEndItem = () => {
 	nodes.push();
 }
@@ -156,8 +120,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function windowResized() {
-	let x = $("#content").offsetWidth;
-	let minArea = 600*1000;
-	let y = minArea/x;
-	resizeCanvas(x, Math.max(600, y), true);
+	let x = $("#content").offsetWidth; //div by something
+	let minArea = 600 * 1000; //Don't have less than this
+	let y = minArea / x;
+	canvasWidth = x;
+	canvasHeight = Math.max(600,y);
+	resizeCanvas(canvasWidth, canvasHeight, true);
+	if (canvasWidth < 550)
+	{
+		gridX = 2;
+		gridY = 8;
+	}
+	else
+	{
+		gridX = 4;
+		gridY = 4;
+	}
+	nodes.snapList();
 }
