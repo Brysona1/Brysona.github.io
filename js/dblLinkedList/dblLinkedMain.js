@@ -19,6 +19,7 @@ let mouseObj = null;
 function setup() {
 	angleMode(DEGREES);
 	let x = $("#content").offsetWidth;
+	//create a canvas based on the window size with a min area of 600k pixles
 	let minArea = 600 * 1000;
 	let y = minArea / x;
 	canvas = createCanvas(x, Math.max(600, y));
@@ -88,10 +89,7 @@ function arrow(x1, y1, x2, y2, headLen, headAngle) {
 	line(x2, y2, x2 + lengthdir_x(headLen, ccAngle), y2 + lengthdir_y(headLen, ccAngle));
 }
 
-function windowResized()
-{
-
-}
+//functions to handle button actions
 const pushEndItem = () => {
 	nodes.push();
 }
@@ -107,7 +105,7 @@ const popFrontItem = () => {
 const deletevalue = () => {
 	nodes.deleteValue(($("#popInput").value));
 }
-
+//add event handlers to buttons
 document.addEventListener("DOMContentLoaded", () => {
 	$("#pushEndButton").addEventListener("click", pushEndItem);
 	$("#pushFrontButton").addEventListener("click", pushFrontItem);
@@ -115,9 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	$("#popFrontButton").addEventListener("click", popFrontItem);
 	$("#deleteValueButton").addEventListener("click", deletevalue);
 });
+
+//handle to user resizing their browser window
 function windowResized() {
-	let x = $("#content").offsetWidth; //div by something
-	let minArea = 600 * 1000; //Don't have less than this
+	let x = $("#content").offsetWidth;
+	let minArea = 600 * 1000;
 	let y = minArea / x;
 	canvasWidth = x;
 	canvasHeight = Math.max(600,y);

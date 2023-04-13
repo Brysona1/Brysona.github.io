@@ -97,7 +97,7 @@ class CirLinkedList {
         this.length++; //add 1 to the length
         return this;
     }
-    deleteValue(value) {
+    deleteValue(value) { //deletes a value from the linked list
         let current = this.head;
         for (let i = 1; current != null && current._value != value; i++) {
             if (current != this.tail) {
@@ -120,15 +120,6 @@ class CirLinkedList {
             this.animObj = current;
             this.length--;
         }
-    }
-    outputToArray() {
-        let array = [];
-        var curNode = this.head;
-        while (curNode != null) {
-            array.push(curNode);
-            curNode = curNode._nextObj;
-        }
-        return array;
     }
 
     createNode(xPos, yPos)
@@ -160,7 +151,7 @@ class CirLinkedList {
             case 4: //unshift
                 this.animUnshift();
                 break;
-            case 5: //delete at 
+            case 5: //delete at
                 this.animDeleteValue();
             default:
                 break;

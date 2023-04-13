@@ -108,15 +108,6 @@ class DblLinkedList {
         }
 
     }
-    outputToArray() {
-        let array = [];
-        var curNode = this.head;
-        while (curNode != null) {
-            array.push(curNode);
-            curNode = curNode._nextObj;
-        }
-        return array;
-    }
 
     createNode(xPos, yPos)
     {
