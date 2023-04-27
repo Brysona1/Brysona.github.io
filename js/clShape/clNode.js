@@ -16,18 +16,13 @@ class clNode extends clRectangle
 		this._hasNext = false; //Tracks whether there is a next node
 		this._nextPtrx = this.x + this.width; //Used to draw the arrow that points to the next node 
 		this._nextPtry = this.y + this.height / 2; 
-		this._prevPtrDestx = this.x; //Used to draw the arrow that comes from the next node
-		this._prevPtrDesty = this.y + this.height / 2;
 		this._nextColor = color(255, 100, 50); //Colors the box and arrow of the next node box
 
 		//Previous Object data
 		this._prevObj = null; //Pointer to the previous node
 		this._hasPrev = false; //Tracks whether there is a previous node
-		this._prevPtrx = this.x + this.width; //Used to draw the arrow that points to the previous node 
-		this._prevPtry = this.y + this.height / 2; 
 		this._nextPtrDestx = this.x; //Used to draw the arrow that comes from the previous node
 		this._nextPtrDesty = this.y + this.height / 2;
-		this._prevColor = color(50, 100, 255); //Colors the box and arrow of the previous node box
 
 	}
 
@@ -42,7 +37,6 @@ class clNode extends clRectangle
 	set alpha(input) {
 		this._objAlpha = input;
 		this._nextColor.setAlpha(input);
-		this._prevColor.setAlpha(input);
 	}
 	get alpha() {
 		return this._objAlpha;
@@ -72,11 +66,9 @@ class clNode extends clRectangle
         if (this._hasNext)
         {
             this.calcNextArrow();
-			this.calcPrevArrowDest();
         }
         if (this._hasPrev)
         {
-			this.calcPrevArrow();
             this.calcNextArrowDest();
         }
 	}
@@ -183,7 +175,6 @@ class clNode extends clRectangle
 		else if (prevAngle >= -165 && prevAngle < -22.5)
         {
 			this._nextPtrDestx = this.x + this._width - middleSize;
-            //this._nextPtrDestx = this.x + this._ptrSize/2;
             this._nextPtrDesty = this.y;
         }
 		else
@@ -193,55 +184,6 @@ class clNode extends clRectangle
 		}
     }
 
-	calcPrevArrow() //calculate where the prevPtr arrow should start
-    {
-        let prevAngle = -atan2(this.y - this._prevObj.y, this.x - this._prevObj.x);
-        if (prevAngle >= -22.5 && prevAngle < 22.5) //The arrow should leave the middle
-        {
-            this._prevPtrx = this.x;
-            this._prevPtry = this.y + this.height * 2/3;
-        }
-        else if (prevAngle >= 22.5 && prevAngle < 165)
-        {
-            this._prevPtrx = this.x + this._ptrSize/2;
-            this._prevPtry = this.y + this.height;
-        }
-		else if (prevAngle >= -165 && prevAngle < -22.5)
-        {
-            this._prevPtrx = this.x + this._ptrSize/2;
-            this._prevPtry = this.y;
-        }
-		else
-		{
-			this._prevPtrx = this.x + this.width;
-            this._prevPtry = this.y + this.height * 2/3;
-		}
-    }
-	calcPrevArrowDest() //calculate where the next object's prevPtr arrow should end
-    {
-        let prevAngle = -atan2(this.y - this._nextObj.y, this._nextObj.x - this.x);
-		let middleSize = this._width - (2 * this._ptrSize);
-        if (prevAngle >= -22.5 && prevAngle < 22.5) //The arrow should leave the middle
-        {
-            this._prevPtrDestx = this.x + this.width;
-            this._prevPtrDesty = this.y + this.height * 2 / 3;
-        }
-        else if (prevAngle >= 22.5 && prevAngle < 165)
-        {
-            this._prevPtrDestx = this.x + middleSize;
-            this._prevPtrDesty = this.y + this.height;
-        }
-		else if (prevAngle >= -165 && prevAngle < -22.5)
-        {
-            this._prevPtrDestx = this.x + middleSize;
-            this._prevPtrDesty = this.y;
-        }
-		else
-		{
-			this._prevPtrDestx = this.x;
-            this._prevPtrDesty = this.y + this.height * 2 / 3;
-		}
-    }
 	assignNext(next) {
 		if (next == null) {
 			this._nextObj = null;

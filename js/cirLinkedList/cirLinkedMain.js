@@ -7,9 +7,9 @@ let Shapes = []; //This is where every shape is stored, regardless of type
 let nodes = new CirLinkedList;
 let canvasWidth = 1000;
 let canvasHeight = 600;
-let gridX = 4;
-let gridY = 4;
-let idGen = 0; //Used to generate a unique object ID for every node.
+let gridX = 4; // Number of columns
+let gridY = 4; //Number of rows
+let idGen = 1; //Used to generate a unique object ID for every node.
 
 
 // The statements in the setup() function
@@ -17,10 +17,9 @@ let idGen = 0; //Used to generate a unique object ID for every node.
 // The array is filled with random values in setup() function.
 function setup() {
 	angleMode(DEGREES);
-	let x = $("#content").offsetWidth;
-	let minArea = 600 * 1000;
-	let y = minArea / x;
-	canvas = createCanvas(x, Math.max(600, y));
+	//create a canvas based on the window size with a min area of 600k pixles
+	calcScreenSize();
+	canvas = createCanvas(canvasWidth, canvasHeight);
 	canvas.parent('content');
 }
 
@@ -52,12 +51,19 @@ function draw() {
 		$("#popFrontButton").disabled = true;
 		$("#deleteValueButton").disabled = true;
 		nodes.checkAnimation();
-	} else {
-		$("#pushEndButton").disabled = false;
-		$("#pushFrontButton").disabled = false;
-		$("#popEndButton").disabled = false;
-		$("#popFrontButton").disabled = false;
-		$("#deleteValueButton").disabled = false;
+	} 
+	else 
+	{
+		if (nodes.animStep != 0) //Ensure that the list is drawn
+        {                         //correctly after the animation completes
+        	nodes.snapList();
+            nodes.animStep = 0;
+			$("#pushEndButton").disabled = false;
+			$("#pushFrontButton").disabled = false;
+			$("#popEndButton").disabled = false;
+			$("#popFrontButton").disabled = false;
+			$("#deleteValueButton").disabled = false;
+        }
 	}
 }
 
@@ -119,22 +125,32 @@ document.addEventListener("DOMContentLoaded", () => {
 	$("#deleteValueButton").addEventListener("click", deletevalue);
 });
 
-function windowResized() {
-	let x = $("#content").offsetWidth; //div by something
-	let minArea = 600 * 1000; //Don't have less than this
-	let y = minArea / x;
-	canvasWidth = x;
-	canvasHeight = Math.max(600,y);
-	resizeCanvas(canvasWidth, canvasHeight, true);
-	if (canvasWidth < 550)
+//calculate canvas width and height based on the window size with a min area of 600K px, or 300K px on mobile
+function calcScreenSize()
+{
+	let x = $("#content").offsetWidth;
+	let minArea = 0; 
+
+	if (x < 700) //settings for thin windows or mobile devices
 	{
+		minArea = 300 * 1000;
 		gridX = 2;
 		gridY = 8;
 	}
-	else
+	else //settings for wider windows
 	{
+		minArea = 600 * 1000;
 		gridX = 4;
 		gridY = 4;
 	}
+
+	let y = minArea / x;
+	canvasWidth = x;
+	canvasHeight = Math.max(600,y);
+}
+
+function windowResized() {
+	calcScreenSize();
+	resizeCanvas(canvasWidth, canvasHeight, true);
 	nodes.snapList();
 }

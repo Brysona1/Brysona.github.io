@@ -378,8 +378,9 @@ class DblLinkedList {
             curObj = curObj._nextObj;
         }
 
-        if (this.animObj != null)
+        if (this.animObj != null && this.animObj != this.tail && this.animObj != this.head)
         {
+            curObj = this.animObj;
             let coords = this.findPos(curIdx);
             if (curObj._hasDestination) //if object is moving
             {
@@ -417,6 +418,20 @@ class DblLinkedList {
         coords[0] = round(width * x - (125/2));
         coords[1] = round(height * y - (40/2));
 
+        //Add an offset to handle thin mobile screens
+        if (canvasWidth < 400)
+        {
+            if (listPos < gridY) //get first column
+            {
+                let offset = (400 - max(320, canvasWidth)) / 2;
+                coords[0] = coords[0] - offset;
+            }
+            else if (listPos >= (gridY * (gridX - 1))) //get last column
+            {
+                let offset = (400 - max(320, canvasWidth)) / 2;
+                coords[0] = coords[0] + offset;
+            }
+        }
         return coords;
     }
     

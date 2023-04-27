@@ -6,6 +6,7 @@ class clRectangle extends clShape
 		super(x, y, hspeed, vspeed)
 		this._width = width;
 		this._height = height;
+		this._fill = 255; //set the default fill to white
 		this.selected = false;
 		this.text = "";
     }
@@ -27,7 +28,14 @@ class clRectangle extends clShape
 	{
 		return this._height;
 	}
-
+	set fill(fillVal)
+	{
+		this._fill = fillVal;
+	}
+	get fill()
+	{
+		return this._fill;
+	}
 	step()
 	{
 		super.step();
@@ -39,7 +47,10 @@ class clRectangle extends clShape
 	}
 	draw()
 	{
+		push();
+		fill(this._fill);
 		rect(this.x, this.y, this.width, this.height);
+		pop();
 		textAlign(CENTER, CENTER);
 		text(this.text, this.x + this._width / 2, this.y + this._height / 2);
 	}

@@ -7,22 +7,18 @@ let Shapes = []; //This is where every shape is stored, regardless of type
 let nodes = new DblLinkedList;
 let canvasWidth = 1000;
 let canvasHeight = 600;
-let gridX = 4;
-let gridY = 4;
-let idGen = 0; //Used to generate a unique object ID for every node.
-let mouseObj = null;
-
+let gridX = 4; //Number of columns
+let gridY = 4; //Number of rows
+let idGen = 1; //Used to generate a unique object ID for every node.
 
 // The statements in the setup() function
 // execute once when the program begins
 // The array is filled with random values in setup() function.
 function setup() {
 	angleMode(DEGREES);
-	let x = $("#content").offsetWidth;
 	//create a canvas based on the window size with a min area of 600k pixles
-	let minArea = 600 * 1000;
-	let y = minArea / x;
-	canvas = createCanvas(x, Math.max(600, y));
+	calcScreenSize();
+	canvas = createCanvas(canvasWidth, canvasHeight);
 	canvas.parent('content');
 }
 
@@ -37,7 +33,7 @@ function draw() {
 	}
 
 	background(220);
-
+	
 	//Perform each object's draw event
 	for (let i = 0; i < Shapes.length; i++) {
 		Shapes[i].draw();
@@ -54,12 +50,20 @@ function draw() {
 		$("#popFrontButton").disabled = true;
 		$("#deleteValueButton").disabled = true;
 		nodes.checkAnimation();
-	} else {
-		$("#pushEndButton").disabled = false;
-		$("#pushFrontButton").disabled = false;
-		$("#popEndButton").disabled = false;
-		$("#popFrontButton").disabled = false;
-		$("#deleteValueButton").disabled = false;
+	} 
+	else 
+	{
+		if (nodes.animStep != 0) //Ensure that the list is drawn
+        {                         //correctly after the animation completes
+        	nodes.snapList();
+            nodes.animStep = 0;
+			$("#pushEndButton").disabled = false;
+			$("#pushFrontButton").disabled = false;
+			$("#popEndButton").disabled = false;
+			$("#popFrontButton").disabled = false;
+			$("#deleteValueButton").disabled = false;
+        }
+		
 	}
 }
 
@@ -114,23 +118,33 @@ document.addEventListener("DOMContentLoaded", () => {
 	$("#deleteValueButton").addEventListener("click", deletevalue);
 });
 
-//handle to user resizing their browser window
-function windowResized() {
+//calculate canvas width and height based on the window size with a min area of 600K px, or 300K px on mobile
+function calcScreenSize()
+{
 	let x = $("#content").offsetWidth;
-	let minArea = 600 * 1000;
-	let y = minArea / x;
-	canvasWidth = x;
-	canvasHeight = Math.max(600,y);
-	resizeCanvas(canvasWidth, canvasHeight, true);
-	if (canvasWidth < 550)
+	let minArea = 0; 
+
+	if (x < 700) //settings for thin windows or mobile devices
 	{
+		minArea = 300 * 1000;
 		gridX = 2;
 		gridY = 8;
 	}
-	else
+	else //settings for wider windows
 	{
+		minArea = 600 * 1000;
 		gridX = 4;
 		gridY = 4;
 	}
+
+	let y = minArea / x;
+	canvasWidth = x;
+	canvasHeight = Math.max(600,y);
+}
+
+//handle to user resizing their browser window
+function windowResized() {
+	calcScreenSize();
+	resizeCanvas(canvasWidth, canvasHeight, true);
 	nodes.snapList();
 }
